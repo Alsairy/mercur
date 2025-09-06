@@ -1,6 +1,7 @@
 export * from "./configuration";
 export * from "./seller";
 export * from "./government";
+export * from "./government-integration";
 export * from "./reviews";
 export * from "./payout";
 export * from "./marketplace";
