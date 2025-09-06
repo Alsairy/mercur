@@ -130,12 +130,37 @@ class SellerModuleService extends MedusaService({
       return false;
     }
 
-    return (
+    const basicOnboardingComplete = (
       onboarding.locations_shipping &&
       onboarding.products &&
       onboarding.store_information &&
       onboarding.stripe_connection
     );
+
+    return basicOnboardingComplete;
+  }
+
+  async isServiceProviderOnboardingCompleted(seller_id: string): Promise<boolean> {
+    const { onboarding } = await this.retrieveSeller(seller_id, {
+      relations: ["onboarding"],
+    });
+
+    if (!onboarding) {
+      return false;
+    }
+
+    const basicComplete = await this.isOnboardingCompleted(seller_id);
+    
+    const serviceProviderComplete = (
+      onboarding.education_license_verification &&
+      onboarding.service_provider_certification &&
+      onboarding.background_check &&
+      onboarding.insurance_verification &&
+      onboarding.portfolio_submission &&
+      (onboarding.government_approval_status === 'approved' || onboarding.government_approval_status === 'not_required')
+    );
+
+    return basicComplete && serviceProviderComplete;
   }
 }
 

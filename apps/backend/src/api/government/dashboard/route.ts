@@ -1,8 +1,8 @@
 import { MedusaRequest, MedusaResponse } from '@medusajs/framework'
 
 export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
-  const requestsService = req.scope.resolve('requests')
-  const sellerService = req.scope.resolve('seller')
+  const requestsService = req.scope.resolve('requests') as any
+  const sellerService = req.scope.resolve('seller') as any
   
   const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
   

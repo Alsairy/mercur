@@ -1,7 +1,7 @@
 import { MedusaRequest, MedusaResponse } from '@medusajs/framework'
 
 export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
-  const { nafath_token, national_id } = req.body
+  const { nafath_token, national_id } = req.body as any
   
   try {
     const response = await fetch(`${process.env.NAFATH_API_URL}/auth/validate`, {
@@ -24,7 +24,7 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
 
     const nafathData = await response.json()
     
-    const governmentService = req.scope.resolve('government')
+    const governmentService = req.scope.resolve('government') as any
     const official = await governmentService.listAndCountGovernmentOfficials({
       nafath_id: nafathData.sub
     })

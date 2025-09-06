@@ -1,7 +1,7 @@
 import { MedusaRequest, MedusaResponse } from '@medusajs/framework'
 
 export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
-  const governmentService = req.scope.resolve('government')
+  const governmentService = req.scope.resolve('government') as any
   
   const officials = await governmentService.listAndCountGovernmentOfficials({}, {})
   
@@ -9,7 +9,7 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
 }
 
 export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
-  const governmentService = req.scope.resolve('government')
+  const governmentService = req.scope.resolve('government') as any
   
   const official = await governmentService.createGovernmentOfficials(req.body)
   
