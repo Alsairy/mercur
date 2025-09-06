@@ -8,6 +8,9 @@ export const ConfigurationRule = model.define("configuration_rule", {
       "require_product_approval",
       "product_request_enabled",
       "product_import_enabled",
+      "require_education_license",
+      "enable_government_oversight",
+      "nafath_sso_required",
     ])
     .unique(),
   is_enabled: model.boolean(),

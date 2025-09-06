@@ -9,10 +9,18 @@ export const createSellerStep = createStep(
   async (input: CreateSellerDTO, { container }) => {
     const service = container.resolve<SellerModuleService>(SELLER_MODULE)
 
-    const seller: SellerDTO = await service.createSellers({
+    const normalizedInput = {
       ...input,
-      handle: toHandle(input.name)
-    })
+      handle: toHandle(input.name),
+      service_categories: input.service_categories && Array.isArray(input.service_categories)
+        ? input.service_categories.reduce((acc: Record<string, unknown>, category: string) => {
+            acc[category] = true;
+            return acc;
+          }, {})
+        : input.service_categories
+    }
+
+    const seller: SellerDTO = await service.createSellers(normalizedInput)
 
     return new StepResponse(seller, seller.id)
   },

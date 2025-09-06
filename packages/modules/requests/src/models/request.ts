@@ -9,5 +9,11 @@ export const Request = model.define('request', {
   reviewer_note: model.text().nullable(),
   status: model
     .enum(['draft', 'pending', 'accepted', 'rejected'])
-    .default('pending')
+    .default('pending'),
+  service_category: model.enum([
+    'construction', 'furnishing', 'transportation', 'staffing', 
+    'training', 'legal_consulting', 'curriculum_support', 'maintenance'
+  ]).nullable(),
+  requires_government_approval: model.boolean().default(false),
+  government_approver_type: model.enum(['MOE', 'ETEC', 'MUNICIPALITY']).nullable(),
 })

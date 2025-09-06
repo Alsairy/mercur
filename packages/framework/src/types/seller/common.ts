@@ -19,6 +19,10 @@ export type SellerDTO = {
   postal_code: string | null;
   country_code: string | null;
   tax_id: string | null;
+  education_license_number: string | null;
+  school_type: 'private' | 'international' | 'public' | null;
+  education_level: 'elementary' | 'middle' | 'high' | 'university' | null;
+  service_categories: string[] | Record<string, unknown> | null;
   handle: string;
   photo: string | null;
   members?: Partial<MemberDTO>[];
@@ -39,6 +43,10 @@ export enum MemberRole {
   OWNER = "owner",
   ADMIN = "admin",
   MEMBER = "member",
+  SCHOOL_OWNER = "school_owner",
+  SERVICE_PROVIDER = "service_provider",
+  INVESTOR = "investor",
+  GOVERNMENT_OFFICIAL = "government_official",
 }
 
 export type MemberDTO = {
