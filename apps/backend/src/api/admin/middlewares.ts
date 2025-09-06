@@ -9,6 +9,7 @@ import { requestsMiddlewares } from './requests/middlewares'
 import { returnRequestsMiddlewares } from './return-request/middlewares'
 import { reviewsMiddlewares } from './reviews/middlewares'
 import { sellerMiddlewares } from './sellers/middlewares'
+import { governmentMiddlewares } from '../government/middlewares'
 
 export const adminMiddlewares: MiddlewareRoute[] = [
   ...orderSetsMiddlewares,
@@ -19,5 +20,6 @@ export const adminMiddlewares: MiddlewareRoute[] = [
   ...sellerMiddlewares,
   ...reviewsMiddlewares,
   ...attributeMiddlewares,
-  ...adminProductsMiddlewares
+  ...adminProductsMiddlewares,
+  ...governmentMiddlewares
 ]

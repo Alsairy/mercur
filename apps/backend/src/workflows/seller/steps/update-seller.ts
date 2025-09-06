@@ -17,10 +17,18 @@ export const updateSellerStep = createStep(
 
     const newHandle = input.name ? toHandle(input.name) : undefined
 
-    const updatedSellers: SellerDTO = await service.updateSellers({
+    const normalizedInput = {
       ...input,
-      ...(newHandle ? { handle: newHandle } : {})
-    })
+      ...(newHandle ? { handle: newHandle } : {}),
+      service_categories: input.service_categories && Array.isArray(input.service_categories)
+        ? input.service_categories.reduce((acc: Record<string, unknown>, category: string) => {
+            acc[category] = true;
+            return acc;
+          }, {})
+        : input.service_categories
+    }
+
+    const updatedSellers: SellerDTO = await service.updateSellers(normalizedInput)
 
     if (input.store_status) {
       await eventBus.emit({
@@ -37,6 +45,16 @@ export const updateSellerStep = createStep(
   async (previousData: UpdateSellerDTO, { container }) => {
     const service = container.resolve<SellerModuleService>(SELLER_MODULE)
 
-    await service.updateSellers(previousData)
+    const normalizedPreviousData = {
+      ...previousData,
+      service_categories: previousData.service_categories && Array.isArray(previousData.service_categories)
+        ? previousData.service_categories.reduce((acc: Record<string, unknown>, category: string) => {
+            acc[category] = true;
+            return acc;
+          }, {})
+        : previousData.service_categories
+    }
+
+    await service.updateSellers(normalizedPreviousData)
   }
 )

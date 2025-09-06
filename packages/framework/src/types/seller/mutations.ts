@@ -6,6 +6,10 @@ export interface CreateSellerDTO
     'id' | 'created_at' | 'updated_at' | 'members'
   > {
   name: string
+  education_license_number?: string
+  school_type?: 'private' | 'international' | 'public'
+  education_level?: 'elementary' | 'middle' | 'high' | 'university'
+  service_categories?: string[] | Record<string, unknown>
 }
 
 export interface UpdateSellerDTO {
@@ -20,6 +24,10 @@ export interface UpdateSellerDTO {
   postal_code?: string
   country_code?: string
   tax_id?: string
+  education_license_number?: string
+  school_type?: 'private' | 'international' | 'public'
+  education_level?: 'elementary' | 'middle' | 'high' | 'university'
+  service_categories?: string[] | Record<string, unknown>
   handle?: string
   photo?: string
   store_status?: StoreStatus
