@@ -83,6 +83,8 @@ module.exports = defineConfig({
           }
         ]
       }
-    }
+    },
+    { resolve: '@mercurjs/government' },
+    { resolve: '@mercurjs/government-integration' }
   ]
 })
