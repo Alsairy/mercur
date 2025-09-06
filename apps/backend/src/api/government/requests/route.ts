@@ -1,7 +1,7 @@
 import { MedusaRequest, MedusaResponse } from '@medusajs/framework'
 
 export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
-  const requestsService = req.scope.resolve('requests')
+  const requestsService = req.scope.resolve('requests') as any
   
   const governmentRequests = await requestsService.listAndCountRequests({
     requires_government_approval: true,
@@ -14,7 +14,7 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
 export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
   const { createServiceRequestWorkflow } = await import('../../../workflows/requests/workflows/create-service-request.js')
   
-  const requestData = req.body
+  const requestData = req.body as any
   const result = await createServiceRequestWorkflow.run({
     input: {
       type: requestData.type,

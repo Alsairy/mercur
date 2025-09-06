@@ -1,8 +1,8 @@
 import { MedusaRequest, MedusaResponse } from '@medusajs/framework'
 
 export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
-  const requestsService = req.scope.resolve('requests')
-  const sellerService = req.scope.resolve('seller')
+  const requestsService = req.scope.resolve('requests') as any
+  const sellerService = req.scope.resolve('seller') as any
   
   const pendingRequests = await requestsService.listAndCountRequests({
     status: 'pending',

@@ -1,7 +1,7 @@
 import { MedusaRequest, MedusaResponse } from '@medusajs/framework'
 
 export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
-  const governmentService = req.scope.resolve('government')
+  const governmentService = req.scope.resolve('government') as any
   
   const entity = await governmentService.retrieveGovernmentEntity(req.params.id)
   
@@ -9,7 +9,7 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
 }
 
 export const PUT = async (req: MedusaRequest, res: MedusaResponse) => {
-  const governmentService = req.scope.resolve('government')
+  const governmentService = req.scope.resolve('government') as any
   
   const entity = await governmentService.updateGovernmentEntities(
     req.params.id,
@@ -20,7 +20,7 @@ export const PUT = async (req: MedusaRequest, res: MedusaResponse) => {
 }
 
 export const DELETE = async (req: MedusaRequest, res: MedusaResponse) => {
-  const governmentService = req.scope.resolve('government')
+  const governmentService = req.scope.resolve('government') as any
   
   await governmentService.deleteGovernmentEntities(req.params.id)
   
