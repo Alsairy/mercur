@@ -41,5 +41,9 @@ export const getRequestWorkflowByType = (type: string) => {
     return acceptProductTagRequestWorkflow
   }
 
+  if (type === 'rfq') {
+    return acceptProductRequestWorkflow
+  }
+
   return null
 }
